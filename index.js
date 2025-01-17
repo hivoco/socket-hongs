@@ -5,7 +5,7 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 
 const server = http.createServer(app);
