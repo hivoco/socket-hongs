@@ -19,7 +19,8 @@ io.on("connection", (socket) => {
 
   // Register the user with email
   socket.on("register_user", (store_id, counter) => {
-    userSockets[store_id + counter] = socket.id; // Map store_id to the socket ID
+
+    userSockets[store_id.toString() + counter.toString()] = socket.id; // Map store_id to the socket ID
     console.log(
       `User registered: ${store_id + counter} with socket ID: ${socket.id}`
     );
@@ -40,7 +41,9 @@ io.on("connection", (socket) => {
 // Trigger mic on for a specific store_id
 app.post("/trigger-mic-on", (req, res) => {
   const { store_id, counter } = req.body;
+  console.log("store_id", store_id, counter, userSockets[store_id+counter]);
   if (userSockets[store_id + counter]) {
+    console.log("haa")
     io.to(userSockets[store_id + counter]).emit(
       "mic_on",
       "Start mic for this user"
